@@ -1,3 +1,4 @@
+from pyexpat import model
 import pandas as pd
 from clean_text import clean_text
 from sklearn.model_selection import train_test_split
@@ -12,9 +13,9 @@ df["clean_text"] = df["text"].apply(lambda x: clean_text(x))
 
 print("Splitting data...")
 X_train, X_test, y_train, y_test = train_test_split(
-    df["text"], df["label"], test_size=0.2, random_state=42
+    df["clean_text"], df["label"], test_size=0.2, random_state=42
 )
-
+print(X_train[:1])
 print("Building model...")
 
 # w2v_model = gensim.models.Word2Vec(X_train, vector_size=100, window=5, min_count=2)
@@ -26,6 +27,7 @@ tagged_docs = [
 ]
 d2v_model = gensim.models.Doc2Vec(tagged_docs, vector_size=100, window=5, min_count=2)
 model = build_d2v_model(d2v_model)
+# model = build_model()
 
 print("Fitting model...")
 model.fit(X_train, y_train)

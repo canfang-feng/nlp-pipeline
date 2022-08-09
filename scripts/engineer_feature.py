@@ -58,34 +58,6 @@ class w2vTransformer(BaseEstimator, TransformerMixin):
         return {"model": self.model}
 
 
-class d2vTransformer(BaseEstimator, TransformerMixin):
-
-    """
-    Wrapper class for running doc2vec into pipelines and FeatureUnions
-    """
-
-    def __init__(self, w2v_model, **kwargs):
-        self.model = d2v_model
-        self.kwargs = kwargs
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        tagged_docs = [
-            gensim.models.doc2vec.TaggedDocument(v, [i]) for i, v in enumerate(X)
-        ]
-        X_vect = [self.model.infer_vector(eval(v.words)) for v in tagged_docs]
-
-        return X_vect
-
-    def get_feature_names(self):
-        return self.model.docvecs.index2entity
-
-    def get_params(self, deep=True):
-        return {"model": self.model}
-
-
 def build_w2v_model(w2v_model):
     """
     Build a pipeline that includes:
@@ -101,6 +73,34 @@ def build_w2v_model(w2v_model):
     return pipeline
 
 
+class d2vTransformer(BaseEstimator, TransformerMixin):
+
+    """
+    Wrapper class for running doc2vec into pipelines and FeatureUnions
+    """
+
+    def __init__(self, d2v_model, **kwargs):
+        self.model = d2v_model
+        self.kwargs = kwargs
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        tagged_docs_X = [
+            gensim.models.doc2vec.TaggedDocument(v, [i]) for i, v in enumerate(X)
+        ]
+        X_vect = [self.model.infer_vector(eval(str(v.words))) for v in tagged_docs_X]
+
+        return X_vect
+
+    def get_feature_names(self):
+        return self.model.docvecs.index2entity
+
+    def get_params(self, deep=True):
+        return {"model": self.model}
+
+
 def build_d2v_model(d2v_model):
     """
     Build a pipeline that includes:
@@ -109,7 +109,7 @@ def build_d2v_model(d2v_model):
     """
     pipeline = Pipeline(
         [
-            ("w2v", w2vTransformer(d2v_model)),
+            ("w2v", d2vTransformer(d2v_model)),
             ("classifier", RandomForestClassifier(n_estimators=100)),
         ]
     )
