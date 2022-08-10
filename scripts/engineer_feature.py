@@ -29,14 +29,17 @@ class w2vTransformer(BaseEstimator, TransformerMixin):
     Wrapper class for running word2vec into pipelines and FeatureUnions
     """
 
-    def __init__(self, w2v_model, **kwargs):
-        self.model = w2v_model
+    def __init__(self, **kwargs):
         self.kwargs = kwargs
 
     def fit(self, X, y=None):
+        # persist model for later use
+        w2v_model = gensim.models.Word2Vec(X, vector_size=100, window=5, min_count=2)
+        self.model = w2v_model
         return self
 
     def transform(self, X):
+        X = X.copy()
         words = set(self.model.wv.index_to_key)
         X_vect = np.array(
             [np.array([self.model.wv[i] for i in ls if i in words]) for ls in X],
@@ -58,7 +61,7 @@ class w2vTransformer(BaseEstimator, TransformerMixin):
         return {"model": self.model}
 
 
-def build_w2v_model(w2v_model):
+def build_w2v_model():
     """
     Build a pipeline that includes:
         - w2vTransformer
@@ -66,7 +69,7 @@ def build_w2v_model(w2v_model):
     """
     pipeline = Pipeline(
         [
-            ("w2v", w2vTransformer(w2v_model)),
+            ("w2v", w2vTransformer()),
             ("classifier", RandomForestClassifier(n_estimators=100)),
         ]
     )
@@ -79,11 +82,19 @@ class d2vTransformer(BaseEstimator, TransformerMixin):
     Wrapper class for running doc2vec into pipelines and FeatureUnions
     """
 
-    def __init__(self, d2v_model, **kwargs):
-        self.model = d2v_model
+    def __init__(self, **kwargs):
         self.kwargs = kwargs
 
     def fit(self, X, y=None):
+        # persist model for later use
+        tagged_docs = [
+            gensim.models.doc2vec.TaggedDocument(v, [i]) for i, v in enumerate(X)
+        ]
+        d2v_model = gensim.models.Doc2Vec(
+            tagged_docs, vector_size=100, window=5, min_count=2
+        )
+        self.model = d2v_model
+
         return self
 
     def transform(self, X):
@@ -101,7 +112,7 @@ class d2vTransformer(BaseEstimator, TransformerMixin):
         return {"model": self.model}
 
 
-def build_d2v_model(d2v_model):
+def build_d2v_model():
     """
     Build a pipeline that includes:
         - w2vTransformer
@@ -109,7 +120,7 @@ def build_d2v_model(d2v_model):
     """
     pipeline = Pipeline(
         [
-            ("w2v", d2vTransformer(d2v_model)),
+            ("w2v", d2vTransformer()),
             ("classifier", RandomForestClassifier(n_estimators=100)),
         ]
     )

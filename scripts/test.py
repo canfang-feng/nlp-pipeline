@@ -18,15 +18,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 print(X_train[:1])
 print("Building model...")
 
-# w2v_model = gensim.models.Word2Vec(X_train, vector_size=100, window=5, min_count=2)
-# model = build_w2v_model(w2v_model)
 
-# use doc2vec model
-tagged_docs = [
-    gensim.models.doc2vec.TaggedDocument(v, [i]) for i, v in enumerate(X_train)
-]
-d2v_model = gensim.models.Doc2Vec(tagged_docs, vector_size=100, window=5, min_count=2)
-model = build_d2v_model(d2v_model)
+# model = build_w2v_model()
+
+model = build_d2v_model()
+
 # model = build_model()
 
 print("Fitting model...")
