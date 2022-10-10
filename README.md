@@ -13,7 +13,7 @@ poetry install
 ```
 
 ## Analysis and Results
-For the spam word cloud, we can see "free","cash",'prize","win" etc. those appealing words are used most commonly. For the ham word cloud, we can see "call","come","go","get" etc. those neutral words are used most commonly. To build a prediction classification model, the dataset is split into training and test sets with 80% and 20% of the data respectively. The model is built using a NLP pipeline. The pipeline includes: tokenization, stop word removal, stemming. Experiments on different ways to do the feature engineering, including TF-IDF, word2vec, doc2vec. The model is trained Random Forest. The model is evaluated using accuracy, precision, recall, and F1 score. The best model is Random Forest on TF-IDF, with 97% accuracy, 1.00% precision, 78% recall on test dataset. The model is saved as a pickle file.
+For the spam word cloud, we can see "free","cash",'prize","win" etc. those appealing words are used most commonly, meanwhile for the ham word cloud, those neutral words like "call","come","go","get" etc. are used mostly. To build a prediction classification model, the dataset is split into training and test sets with 80% and 20% of the data respectively. The model is built using an NLP pipeline. The pipeline includes: tokenization, stop word removal, and stemming. Experiments on different ways to do feature engineering, including TF-IDF, word2vec, and doc2vec. The model is trained in Random Forest. The model is evaluated using accuracy, precision, and recall. The best model is Random Forest on TF-IDF, with 97% accuracy, 1.00% precision, 78% recall on the test dataset. This model is saved as a pickle file.
 
 ## Project structure 
 <pre>
