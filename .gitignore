@@ -3,4 +3,4 @@ scripts/RNN.py
 scripts/test.py
 data/spam1.csv
 scripts/__pycache__
-
+.ipynb_checkpoints/

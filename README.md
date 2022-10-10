@@ -12,35 +12,21 @@ poetry install
 
 ```
 
-## Run instructions:
-
-Run the following commands in the project's **root directory** to process raw data, train and save model.
-
-Step 1: run a pipeline to load profiles and activity data, clean data, create labels, extract features, and save the processed data to root directory for further ML modeling.
-```
-python process_data.py
-```
-
-Step 2: run ML pipeline to train classifier and save results to `experiments` folder (if not exist, it will be created). Results include model, feature importance, and model performance, prediction results on test set.
-```
-python train_model.py
-```
-
-Step 3: Try different models by changing the `models` dictionary in `main` function in `train_model.py` and run the script again. Compare the results in "experiments" folder and improve the model performance.
+## Analysis and Results
+For the spam word cloud, we can see "free","cash",'prize","win" etc. those appealing words are used most commonly. For the ham word cloud, we can see "call","come","go","get" etc. those neutral words are used most commonly. To build a prediction classification model, the dataset is split into training and test sets with 80% and 20% of the data respectively. The model is built using a NLP pipeline. The pipeline includes: tokenization, stop word removal, stemming. Experiments on different ways to do the feature engineering, including TF-IDF, word2vec, doc2vec. The model is trained Random Forest. The model is evaluated using accuracy, precision, recall, and F1 score. The best model is Random Forest on TF-IDF, with 97% accuracy, 1.00% precision, 78% recall on test dataset. The model is saved as a pickle file.
 
 ## Project structure 
 <pre>
 .
 ├── data
-│ ├── activity                <- Folder of activity data
-│ └── profiles                <- Folder of profiles data
-├── experiments               <- Experiment results folder
-│   ├── 20220911180846        <- Result of RandomForestClassifier
-│   └── 20220911194611        <- Result of HistGradientBoostingClassifier
-├── config.py                 <- Script to set up configurations and parameters
-├── process_data.py           <- Script to process data
-├── train_model.py            <- Script to train model
-├── requirements.txt          <- The requirements file for reproducing the analysis environment
+│ └── spam.csv                  <- SMS spam dataset
+├── scripts                     <- Experiment results folder
+│   ├── util.py                 <- Functions to join,clean, tokenize text, word frequency
+│   └── nlp_func.py             <- Functions to build NLP pipeline, train, test, and evaluate model
+├── SMS_Spam_Classifier.ipynb   <- Notebook to load, explore, and preprocess data, create models
+├── poetry.lock                 <- Poetry lock file for dependencies
+├── pyproject.toml              <- Poetry project file for dependencies
+├── .python-version          
 ├── .gitignore
 └── README.md
  
