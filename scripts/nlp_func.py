@@ -2,9 +2,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import precision_score, recall_score
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
+from scripts.util import clean_text
 import gensim
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.base import BaseEstimator, TransformerMixin
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
 
 
 def build_model():
@@ -15,7 +19,7 @@ def build_model():
     """
     pipeline = Pipeline(
         [
-            ("tfidf", TfidfVectorizer()),
+            ("tfidf", TfidfVectorizer(tokenizer=clean_text)),
             ("classifier", RandomForestClassifier(n_estimators=100)),
         ]
     )
@@ -140,3 +144,13 @@ def evaluate_model(y_test, y_pred):
             round((y_pred == y_test).sum() / len(y_pred), 3),
         )
     )
+
+
+def plot_confusion_matrix(cm: np.array):
+    fig, ax = plt.subplots(1, figsize=(4, 4))
+    sns.heatmap(cm, annot=True, ax=ax, fmt="d", cmap="Blues")
+    ax.set_title("Confusion matrix")
+    ax.set_ylabel("True label")
+    ax.set_xlabel("Predicted label")
+    fig.tight_layout()
+    plt.show()

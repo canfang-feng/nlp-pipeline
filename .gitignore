@@ -1,0 +1,6 @@
+# RNN.py in scripts folder
+scripts/RNN.py
+scripts/test.py
+data/spam1.csv
+scripts/__pycache__
+
