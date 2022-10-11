@@ -14,12 +14,15 @@ of messages being ham and 13% (747 cases) being spam.
 What are the difference of words used in spam and ham messages? We use wordcloud to visualize the most frequent words in spam and ham messages. 
 
 The wordclouds show that spam messages tend to use more words like "free", "call", "text", "urgent", ,"cash",'prize","win" etc. Those texts promiss something for free, or urge the receiver to take action.
+
 ![img](img/spam_wordcloud.png)
+
 ![img](img/spam_topwords.png)
 
 Meanwhile, for the ham word cloud, those neutral verb words like "call","come","go","get" etc. are used mostly. 
 
 ![img](img/ham_wordcloud.png)
+
 ![img](img/ham_topwords.png)
 
 ## Build a classification model 
@@ -39,4 +42,5 @@ The model is trained in RandomForestClassifer. The model is evaluated using accu
 There are three models trained based on different feature engineering methods. The model trained using TF-IDF has the highest accuracy (97%), precision (100%), and recall (78%) on test dataset.This model is saved as a pickle file for future use. The model trained using doc2vec has the second highest accuracy (95.5%), precision (98.1%), and recall (68.0%). The model trained using word2vec has the lowest highest accuracy (94.6%), precision (100%), and recall (60%). 
 
 _Fig: confusion matrix for the model trained using TF-IDF_
+
 ![img](img/RF_confusionmatrix.png)
