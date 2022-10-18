@@ -1,5 +1,7 @@
 # SMS SPAM detection using NLP pipeline
 
+![img](img/poster.PNG)
+
 Spam is unsolicited and unwanted messages sent electronically whose content may be malicious. The danger could be: exposure of pravicy, a fraud, or a virus,etc. Spam is a major problem for email users, and it is a growing problem for mobile phone users. The goal of this project is to build a model based on NLP that can detect SMS spam. 
 
 
