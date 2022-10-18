@@ -12,8 +12,18 @@ poetry install
 
 ```
 
+## Usage
+You can run the notebook in the root directory of the project, where `pyproject.toml` is located. 
+
+```
+poetry run jupyter notebook
+```
+
 ## Analysis and Results
-For the spam word cloud, we can see "free","cash",'prize","win" etc. those appealing words are used most commonly, meanwhile for the ham word cloud, those neutral words like "call","come","go","get" etc. are used mostly. To build a prediction classification model, the dataset is split into training and test sets with 80% and 20% of the data respectively. The model is built using an NLP pipeline. The pipeline includes: tokenization, stop word removal, and stemming. Experiments on different ways to do feature engineering, including TF-IDF, word2vec, and doc2vec. The model is trained in Random Forest. The model is evaluated using accuracy, precision, and recall. The best model is Random Forest on TF-IDF, with 97% accuracy, 1.00% precision, 78% recall on the test dataset. This model is saved as a pickle file.
+For the spam word cloud, we can see "free","cash",'prize","win" etc. those appealing words are used most commonly, meanwhile for the ham word cloud, those neutral words like "call","come","go","get" etc. are used mostly. To build a prediction classification model, the dataset is split into training and test sets with 80% and 20% of the data respectively. The model is built using an NLP pipeline. The pipeline includes: tokenization, stop word removal, and stemming. Experiments on different ways to do feature engineering, including TF-IDF, word2vec, and doc2vec. The model is trained in Random Forest Classifier. The model is evaluated using precision, recall and F1 score. The best model is Random Forest on TF-IDF, with 98% F1 score, 1.00% precision, 83% recall on the test dataset. This model is saved as a pickle file for future use.
+
+![img](img/confusion_matrix.png)
+
 
 ## Project structure 
 <pre>
@@ -31,3 +41,7 @@ For the spam word cloud, we can see "free","cash",'prize","win" etc. those appea
 └── README.md
  
 </pre>
+
+## Acknowledgements
+Must give credit to [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection) for the dataset and Udacity for the code review.
+
