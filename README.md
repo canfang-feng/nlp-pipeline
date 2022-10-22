@@ -1,4 +1,4 @@
-# SMS SPAM detection using NLP pipeline
+# Youtube SPAM comments detection using NLP pipeline
 Spam is unsolicited and unwanted messages sent electronically whose content may be malicious. The danger could be: exposure of pravicy, a fraud, or a virus,etc. It is a major problem for email and mobine phone users, and it is a growing problem for social media users like Youtube users. We need a solution to detect spam comments. The goal of this project is to build a model that can detect spam comments in Youtube. The dataset is from [kaggle datasets: Youtube SPAM Classified-comments](https://www.kaggle.com/datasets/goneee/youtube-spam-classifiedcomments?select=Youtube03-LMFAO.csv). It contains 5 csv files with a total of 1956 Youtube messages and is already labeled. The model is built using a NLP pipeline. 
 
 ## Dependencies
@@ -30,13 +30,13 @@ In this dataset, we can see  Shadrach Grentz, Hidden Love, LuckyMusiqLive, etc. 
 <pre>
 .
 ├── data
-│ └── spam.csv                  <- SMS spam dataset
-├── scripts                     <- Experiment results folder
-│   ├── util.py                 <- Functions to join,clean, tokenize text, word frequency
-│   └── nlp_func.py             <- Functions to build NLP pipeline, train, test, and evaluate model
-├── SMS_Spam_Classifier.ipynb   <- Notebook to load, explore, and preprocess data, create models
-├── poetry.lock                 <- Poetry lock file for dependencies
-├── pyproject.toml              <- Poetry project file for dependencies
+│ └── spam.csv                        <- Youtube spam comments dataset
+├── scripts                           <- Experiment results folder
+│   ├── util.py                       <- Functions to join,clean, tokenize text, word frequency
+│   └── nlp_func.py                   <- Functions to build NLP pipeline, train, test, and evaluate model
+├── Spam_Comments_Classifier.ipynb    <- Notebook to load, explore, and preprocess data, create models
+├── poetry.lock                       <- Poetry lock file for dependencies
+├── pyproject.toml                    <- Poetry project file for dependencies
 ├── .python-version          
 ├── .gitignore
 └── README.md
@@ -44,5 +44,5 @@ In this dataset, we can see  Shadrach Grentz, Hidden Love, LuckyMusiqLive, etc. 
 </pre>
 
 ## Acknowledgements
-Must give credit to [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection) for the dataset and Udacity for the code review.
+Must give credit to [Youtube SPAM CLASSIFIED-COMMENTS](https://www.kaggle.com/datasets/goneee/youtube-spam-classifiedcomments?select=Youtube03-LMFAO.csv) for the dataset and Udacity for the guidance and code review.
 
